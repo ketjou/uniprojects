@@ -1,8 +1,7 @@
-Biological data with Python (Biopython)
+Biological Data with Python (Biopython)
 
-This folder holds the exercises done in the course BIOI4270 Bioinformatics Programming Course.
-The files are in Jupyter -format and each exercise is done from scratch after the lectures.
-Files are unscrutinized, meaning that eg. the comments addressed to the lecturer are left as such
-also there might be some sub-tasks that haven't been complished or have a wrong solution.
-No template preceded the projectwork, it was done totally from scratch using the learnt methods.
-Some of the files may require external datasets to run.
+This folder contains exercises completed for the course BIOI4270 Bioinformatics Programming. All exercises were done using Python in a Jupyter environment, and each exercise was implemented from scratch following the lectures.
+
+Please note that the files are unreviewed: comments directed at the instructor have been left intact, and some sub-tasks may be incomplete or contain incorrect solutions. The project work was created entirely from scratch without a template, using only the methods learned during the course.
+
+Some notebooks may require external datasets to run properly.
