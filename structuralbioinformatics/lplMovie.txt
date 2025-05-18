@@ -1,0 +1,66 @@
+# open the more conserved model for LPL-GPIHBP1, remove unnecessary elements, name ca binding residues, hide everything and turn to have a better visibility
+open 6OB0; del :.b-d; del :.f-h; del :NAG,EDO, del: 642.A,601.A; sel :CA zr<3.0; namesel caConts; ~sel; ~disp; turn x 100; turn y -110; focus; ~ribbon
+# color the parts of the model (still hidden)
+rainbow strand white,cyan; rainbow helix orange,gold; ribinsidecolor orangered; color aquamarine :.e; color gold :139-143.e; col white coil; col byelement
+# start recording the movie
+movie record
+# start drawing the model and finally show also the ca binding pocket
+perframe "rib :$1.a" range 30,471;  wait 442; perframe "rib :$1.e" range 61,143; wait 100; disp caConts
+scene originalRi save
+2dlabels create lab1 text 'LPL-GPIHBP1 complex' color white size 26 style bold xpos .56 ypos .56 visibility show; 2dlabels acreate arr1 start 0.56,0.54 end 0.52,0.54 color cyan head pointer visibility show; 2dlabels acreate arr2 start 0.62,0.60 end 0.59,0.71 color aquamarine head pointer visibility show
+sleep 3
+# fade out
+2dlabels change lab1 visibility hide frames 90; wait; 2dlabels achange * visibility hide frames 90; wait 25
+# and delete eventually
+2dlabels delete lab1; 2dlabels adelete *
+# zooming in to the ca2 pocket
+clip on; wait; roll y 3 8; wait 25; center :ca; wait; scale 1.01 100; wait 100; clip yon 50; clip hither -30; wait 100; sel caConts; repr sphere sel; ~sel; wait 20; 2dlabels create lab2 text 'Tightly packed Ca2+ pocket' color white size 26 style bold xpos .56 ypos .56 visibility show
+sleep 3
+# show the inside of the binding pocket
+wait; clip hither -7; wait 100; roll y 0.6 100; wait 50; roll y -0.6 100; wait 100
+# zoom out 
+scale 0.99 100; clip off; wait 25; center; wait ; 2dlabels change lab2 visibility hide frames 90; sel caConts; repr stick sel; ~sel
+2dlabels delete lab2
+sleep 3
+# show the lid 
+sel :243-266.a; namesel tail; disp :m3d; col grey ~tail & ~:m3d; ~ribinsidecolor; ~sel
+2dlabels create lab3 text 'The lid of the active site\nand\nstabilizing ligand M3D' color white size 26 style bold xpos .22 ypos .37 visibility show; 2dlabels acreate arr3 start 0.26,0.41 end 0.35,0.49 color gold head pointer visibility show; 2dlabels acreate arr4 start 0.36,0.30 end 0.40,0.30 color grey head pointer visibility show;
+wait 100;
+2dlabels change lab3 visibility hide frames 90; wait; 2dlabels achange * visibility hide frames 90; wait
+2dlabels delete *; 2dlabels adelete *; wait; del :m3d;
+# show the pocket
+sel :159,183,268 & :.a; namesel pocket; disp sel; col goldenrod sel; col byelement sel; wait; center sel; ~sel;
+roll y 1 100; wait; scale 1.01 100; rlabel pocket; wait; 2dlabels create lab4 text 'Active site\nand\ncatalytic triad' color white size 26 style bold xpos .36 ypos .59 frames 100; wait 10; 2dlabels acreate arr3 start 0.46,0.56 end 0.59,0.43 color goldenrod head solid visibility show;
+wait 200; 2dlabels change * visibility hide frames 70; wait; 2dlabels achange * visibility hide frames 90; wait 100; scale 0.99 100; wait 100; center
+2dlabels delete *; 2dlabels adelete *;~rlabel
+sleep 3
+movie crossfade 50;
+# color by hydrophobicity, show surface and highlight the cavity
+# display the coloring scale
+rangecolor kdHydrophobicity -4.5 #0f1bc7adcf5b 0 white 4.5 #9eb820005eb8; wait 25; colorkey 0.65,0.50 0.80,0.54 -4.5 #0f1bc7adcf5b 0 white 4.5 #9eb820005eb8;
+2dlabels create lab5 text 'kdHydrophobicity surface' color white size 26 style bold xpos 0.64 ypos .56 frames 100; wait 100;
+surface; ~ribbon; wait;
+movie crossfade 50;
+sel :82,84,113,121,158,159,160,183,185,187,212,221,239,260,264,265,268 & :.a; namesel cavity
+scene hydro save;
+wait 200; transparency 80 ~sel; wait 200; transparency 0 tail; ~sel; wait; roll x 0.1 100; wait; roll y 0.2 100; wait 100;
+movie crossfade 50;
+transparency 0; roll y 1 360; wait; 2dlabels change * visibility hide frames 40; wait; ~colorkey; wait; 2dlabels delete *;
+movie crossfade 50;
+# display the coloring scale
+coulombic -10 red 0 white 10 blue; wait 25; colorkey 0.65,0.50 0.80,0.54 -10 #ffff00000000 0 #ffffffffffff 10 #00000000ffff; wait; 2dlabels create lab6 text 'Electrostatic (Coulomb)\npotential surface' color white size 26 style bold xpos 0.65 ypos .59 frames 100; wait 100;
+transparency 80 ~cavity & ~tail; wait 200; wait; roll x 0.1 100; wait; roll y 0.2 100; wait 100;
+movie crossfade 50;
+transparency 0; roll y 1 360; wait;  wait; 2dlabels change * visibility hide frames 40; wait; ~colorkey; wait; 2dlabels delete *;
+scene electro save; wait;
+movie crossfade 75;
+transparency 0; roll y 0.5 400; rock x 0.5 1; wait 100; wait; 2dlabels change * visibility hide frames 40; wait; ~colorkey; wait;
+scene electro save; wait;
+movie crossfade 75; scolor #0 color blue;
+# show interface surface biasing the surface toward the former; 
+# disregard residues in each chain whose centroids are not within 15.0 Å of any residue centroid in the other chain 
+ribbon; ~surf; wait 100; intersurf #0:.a #0:.e pair chain prune 15 bias .2; 
+sleep 3; 2dlabels create lab7 text 'Tight interface between proteins' color white size 26 style bold xpos 0.64 ypos .56 frames 100; wait 100;
+movie crossfade 75; wait;sleep 3;
+surf; roll y 1 360; wait 400; 2dlabels delete *;
+movie encode AdventuresOfLPL.mp4
