@@ -1,1 +1,1 @@
-This folder included exercises done on Introduction to statistical analysis course by Jouni Kettunen. All reuse is prohipited and no quarantee of the rightness of the answers is given.
+This folder contains exercises completed by Jouni Kettunen for the Introduction to Statistical Analysis course. All reuse is prohibited, and no guarantee is given regarding the accuracy of the answers.
