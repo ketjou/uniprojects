@@ -1,1 +1,1 @@
-This folder contains exercises completed by Jouni Kettunen for the Introduction to Statistical Analysis course. All reuse is prohibited, and no guarantee is given regarding the accuracy of the answers.
+This folder contains exercises completed by Jouni Kettunen for the Introduction to Statistical Analysis course. All exercises were done using Python in a Jupyter environment. All reuse is prohibited, and no guarantee is given regarding the accuracy of the answers.
